@@ -21,6 +21,16 @@ export default function TextForm(props) {
         setText(newText.join(" "))
     }
 
+    const handleCopy = () => {
+        navigator.clipboard.writeText(text)
+        props.showAlert('Text Copied to Clipboard!', 'Success')
+    }
+
+    const handleClear = () => {
+        let newText = ""
+        setText(newText)
+    }
+
 
     const handleOnChange = (event) => {
         setText(event.target.value)
@@ -35,11 +45,13 @@ export default function TextForm(props) {
         </div>
         <button disabled = {text.length === 0} className="btn btn-info mx-2 my-2" onClick={handleOnClick}>UpperCase</button>
         <button disabled = {text.length === 0} className="btn btn-info mx-2 my-2" onClick={handleTextCaseClick}>Text Case</button>
+        <button disabled = {text.length === 0} className="btn btn-info mx-2 my-2" onClick={handleCopy}>Copy Text</button>
+        <button disabled = {text.length === 0} className="btn btn-info mx-2 my-2" onClick={handleClear}>Clear Text</button>
     </div>
     <div className="container">
         <h5> Your summary: </h5>
-        <p>{text.split(" ").filter((element) => {return element.length!==0}).length} words and {text.length} characters</p>
-        <p>{0.008 * text.split(" ").filter((element) => {return element.length!==0}).length} minutes to read</p>
+        <p>{text.split(/\s+/).filter((element) => {return element.length!==0}).length} words and {text.length} characters</p>
+        <p>{0.008 * text.split(/\s+/).filter((element) => {return element.length!==0}).length} minutes to read</p>
         <p><h5>Preview</h5>{text}</p>
     </div>
     </>

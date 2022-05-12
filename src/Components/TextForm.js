@@ -6,7 +6,10 @@ export default function TextForm(props) {
     const handleOnClick = () => {
         let newText = text.toUpperCase()
         setText(newText)
-        props.showAlert('Converted to UpperCase', 'Success')
+        if(newText.split(" ").filter((element) => {return element.length!==0}).length !==0)
+            props.showAlert('Converted to UpperCase!', 'Success')
+        else
+            props.showAlert('Nothing Entered! Please Enter Something', 'Failure')
     }
 
     const handleTextCaseClick = () => {
@@ -30,13 +33,13 @@ export default function TextForm(props) {
         <h3>{props.heading}</h3>
         <textarea class="form-control" value = {text} onChange = {handleOnChange} id="textArea" rows="3"></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleOnClick}>UpperCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleTextCaseClick}>Text Case</button>
+        <button disabled = {text.length === 0} className="btn btn-info mx-2 my-2" onClick={handleOnClick}>UpperCase</button>
+        <button disabled = {text.length === 0} className="btn btn-info mx-2 my-2" onClick={handleTextCaseClick}>Text Case</button>
     </div>
     <div className="container">
         <h5> Your summary: </h5>
-        <p>{text.split(" ").length} words and {text.length} characters</p>
-        <p>{0.008 * text.split(" ").length} minutes to read</p>
+        <p>{text.split(" ").filter((element) => {return element.length!==0}).length} words and {text.length} characters</p>
+        <p>{0.008 * text.split(" ").filter((element) => {return element.length!==0}).length} minutes to read</p>
         <p><h5>Preview</h5>{text}</p>
     </div>
     </>

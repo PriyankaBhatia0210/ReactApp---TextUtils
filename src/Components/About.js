@@ -1,13 +1,22 @@
 import React, {useState} from 'react'
 
-export default function About() {
+export default function About(props) {
+    /*
     const [myStyle, setMyStyle] = useState(
         {
             color: 'black',
             backgroundColor: 'white'
         }
     )
+    */
 
+    let myStyle = {
+        color: props.mode ==='dark'?'white':'black',
+        backgroundColor: props.mode ==='dark'?'black':'white'
+    }
+
+    /*
+    ** Will not be using this anymore, will be changing mode from main mode button on Navbar
     const [btnText, setBtnText] = useState("Enter Light Mode")
 
     const toggleStyle = ()=> {
@@ -25,6 +34,8 @@ export default function About() {
             setBtnText("Enter Light Mode")
         }
     }
+
+    */
   return (
     <>
     <div className="container">
@@ -66,9 +77,6 @@ export default function About() {
         </div>
         </div>
     </div>
-    </div>
-    <div className="container">
-        <button onClick = {toggleStyle} className="btn btn-primary my-4" style={myStyle}>{btnText}</button>
     </div>
     </div>
 </>
